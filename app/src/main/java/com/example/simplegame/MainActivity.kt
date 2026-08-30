@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
 fun TicTacToeGame() {
     val playerX = stringResource(R.string.player_x)
     val playerO = stringResource(R.string.player_o)
-    
+
     var board by remember { mutableStateOf(List(9) { "" }) }
     var xIsNext by remember { mutableStateOf(true) }
     val winner = calculateWinner(board)
