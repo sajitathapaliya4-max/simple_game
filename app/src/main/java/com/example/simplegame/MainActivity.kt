@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,9 +38,9 @@ fun TicTacToeGame() {
     var xIsNext by remember { mutableStateOf(true) }
     val winner = calculateWinner(board)
     val status = when {
-        winner != null -> "Winner: $winner"
-        board.all { it.isNotEmpty() } -> "Draw!"
-        else -> "Next player: ${if (xIsNext) "X" else "O"}"
+        winner != null -> stringResource(R.string.winner_status, winner)
+        board.all { it.isNotEmpty() } -> stringResource(R.string.draw_status)
+        else -> stringResource(R.string.next_player_status, if (xIsNext) "X" else "O")
     }
 
     Column(
@@ -48,7 +49,7 @@ fun TicTacToeGame() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Tic Tac Toe",
+            text = stringResource(R.string.game_title),
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(16.dp)
@@ -85,7 +86,7 @@ fun TicTacToeGame() {
             board = List(9) { "" }
             xIsNext = true
         }) {
-            Text("Reset Game")
+            Text(stringResource(R.string.reset_game))
         }
     }
 }
