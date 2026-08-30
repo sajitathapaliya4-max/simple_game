@@ -6,4 +6,6 @@
     <string name="draw_status">Draw!</string>
     <string name="next_player_status">Next player: %1$s</string>
     <string name="reset_game">Reset Game</string>
+    <string name="player_x">X</string>
+    <string name="player_o">O</string>
 </resources>
