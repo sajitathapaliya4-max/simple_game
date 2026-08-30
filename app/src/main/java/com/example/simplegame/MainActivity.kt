@@ -34,8 +34,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TicTacToeGame() {
-    val playerX = stringResource(R.string.player_x)
-    val playerO = stringResource(R.string.player_o)
+    val xLabel = stringResource(R.string.player_x)
+    val oLabel = stringResource(R.string.player_o)
 
     var board by remember { mutableStateOf(List(9) { "" }) }
     var xIsNext by remember { mutableStateOf(true) }
@@ -43,7 +43,7 @@ fun TicTacToeGame() {
     val status = when {
         winner != null -> stringResource(R.string.winner_status, winner)
         board.all { it.isNotEmpty() } -> stringResource(R.string.draw_status)
-        else -> stringResource(R.string.next_player_status, if (xIsNext) playerX else playerO)
+        else -> stringResource(R.string.next_player_status, if (xIsNext) xLabel else oLabel)
     }
 
     Column(
@@ -71,11 +71,11 @@ fun TicTacToeGame() {
                     val index = row * 3 + col
                     Square(
                         value = board[index],
-                        playerX = playerX,
+                        xLabel = xLabel,
                         onClick = {
                             if (board[index].isEmpty() && winner == null) {
                                 val newBoard = board.toMutableList()
-                                newBoard[index] = if (xIsNext) playerX else playerO
+                                newBoard[index] = if (xIsNext) xLabel else oLabel
                                 board = newBoard
                                 xIsNext = !xIsNext
                             }
@@ -96,7 +96,7 @@ fun TicTacToeGame() {
 }
 
 @Composable
-fun Square(value: String, playerX: String, onClick: () -> Unit) {
+fun Square(value: String, xLabel: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .size(100.dp)
@@ -109,7 +109,7 @@ fun Square(value: String, playerX: String, onClick: () -> Unit) {
             text = value,
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
-            color = if (value == playerX) Color.Blue else Color.Red
+            color = if (value == xLabel) Color.Blue else Color.Red
         )
     }
 }
